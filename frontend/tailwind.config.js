@@ -5,7 +5,9 @@ export default {
     extend: {},
     /** overriding default tailwind styles */
     container: {
-      padding: "10rem",
+      padding: {
+        md: "10rem",
+      },
     },
   },
   plugins: [],
