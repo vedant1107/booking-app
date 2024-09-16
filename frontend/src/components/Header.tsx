@@ -3,7 +3,8 @@ import { useAppContext } from "../contexts/AppContext";
 
 const Header = () => {
   const { isLoggedIn } = useAppContext();
-  console.log(isLoggedIn);
+  // TODO:
+  // console.log(isLoggedIn);
   return (
     <div className="bg-blue-800 py-6">
       <div className="container mx-auto flex justify-between">
