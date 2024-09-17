@@ -1,2 +1,6 @@
 notes.txt
 */node_modules
+.env
+.vscode
+dist
+*.tsbuildinfo
