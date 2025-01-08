@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import "dotenv/config";
 import cookieParser from "cookie-parser";
@@ -19,9 +19,11 @@ cloudinary.config({
 });
 
 const app = express();
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(
   cors({
     origin: [process.env.FRONTEND_URL, "https://bookmystay-vf65.onrender.com/"],
@@ -34,6 +36,10 @@ app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelRoutes);
+
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+});
 
 mongoose
   .connect(process.env.MONGO_CONNECTION_STRING as string)
