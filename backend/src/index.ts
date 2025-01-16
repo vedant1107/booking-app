@@ -10,7 +10,6 @@ import path from "path";
 import { v2 as cloudinary } from "cloudinary";
 
 // TODO: add try catch for db connection and server listening
-// mongoose.connect(process.env.MONGO_CONNECTION_STRING as string);
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -23,10 +22,10 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(
   cors({
     origin: [process.env.FRONTEND_URL, "https://bookmystay-vf65.onrender.com/"],
+    // ensures that credentials like cookies and authentication headers are included in cross-origin requests.
     credentials: true,
   })
 );
@@ -52,7 +51,3 @@ mongoose
   .catch((error) => {
     console.log("db connection error: ", error);
   });
-
-// app.listen(7000, () => {
-//   console.log("server is running on localhost:7000");
-// });

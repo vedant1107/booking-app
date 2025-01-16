@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
-const router = express.Router();
 import User from "../models/user";
 import jwt from "jsonwebtoken";
 import { check, validationResult } from "express-validator";
+
+const router = express.Router();
 
 /* /api/users/register */
 router.post(
@@ -17,6 +18,7 @@ router.post(
     ).isLength({ min: 6 }),
   ],
   async (req: Request, res: Response) => {
+    // TODO: try to make a function for this request validation
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: errors.array() });
@@ -27,6 +29,7 @@ router.post(
         email: req.body.email,
       });
 
+      /** User already exists */
       if (user) {
         return res.status(400).json({ message: "User already exists" });
       }
@@ -42,12 +45,13 @@ router.post(
         }
       );
 
+      /** Sending the jwt token as a cookie */
       res.cookie("auth_token", token, {
-        /** to enable access for server only */
+        /** to enable access for server only, prevents client-side JS from accessing the cookie */
         httpOnly: true,
-        /** for only https requests */
+        /** For only https requests */
         secure: process.env.NODE_ENV === "production",
-        /** must be same as jwt token expiry time, but in milliseconds */
+        /** Must be same as jwt token expiry time, but in milliseconds */
         maxAge: 1 * 24 * 60 * 60 * 1000,
       });
 

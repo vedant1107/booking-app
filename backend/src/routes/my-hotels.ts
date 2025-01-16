@@ -17,6 +17,7 @@ const upload = multer({
 });
 
 // api/my-hotels
+// add hotel
 router.post(
   "/",
   verifyToken,
@@ -62,12 +63,15 @@ router.post(
   }
 );
 
+// get user's hotels
 router.get("/", verifyToken, async (req: Request, res: Response) => {
   try {
+    // TODO: remove
     console.log("id", req.userId);
     const hotels = await Hotel.find({ userId: req.userId });
 
-    console.log("hotes", hotels);
+    // TODO: remove
+    console.log("hotels", hotels);
     res.json(hotels);
   } catch (error) {
     res.status(500).json({ message: "Error fetching hotels" });

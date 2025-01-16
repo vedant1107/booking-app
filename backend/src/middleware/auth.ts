@@ -1,6 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
+/** Extends the default 'Express.Request' interface to include a userId property.
+ * This allows TypeScript to recognize req.userId as a valid property in the rest of the codebase.
+ */
 declare global {
   namespace Express {
     interface Request {
