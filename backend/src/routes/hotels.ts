@@ -100,8 +100,8 @@ router.post(
     const totalCost = hotel.pricePerNight * numberOfNights;
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: totalCost,
-      currency: "USD",
+      amount: totalCost * 100,
+      currency: "INR",
     });
 
     if (!paymentIntent.client_secret) {
