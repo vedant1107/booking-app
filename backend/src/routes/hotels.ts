@@ -112,6 +112,10 @@ router.post(
     const paymentIntent = await stripe.paymentIntents.create({
       amount: totalCost * 100,
       currency: "INR",
+      metadata: {
+        hotelId,
+        userId: req.userId,
+      },
     });
 
     if (!paymentIntent.client_secret) {
@@ -120,7 +124,7 @@ router.post(
 
     const response = {
       paymentId: paymentIntent.id,
-      clientSecret: paymentIntent.client_secret,
+      clientSecret: paymentIntent.client_secret.toString(),
       totalCost,
     };
 
@@ -138,8 +142,6 @@ router.post(
       const paymentIntent = await stripe.paymentIntents.retrieve(
         paymentIntentId as string
       );
-
-      console.log("payment intent", paymentIntent);
 
       if (!paymentIntent) {
         return res.status(400).json({ message: "Payment intent not found" });
@@ -165,8 +167,16 @@ router.post(
 
       const hotel = await Hotel.findOneAndUpdate(
         { _id: req.params.hotelId },
-        { $push: { bookings: newBooking } }
+        { $push: { bookings: newBooking } },
+        { new: true }
       );
+
+      if (!hotel) {
+        return res.status(400).json({ message: "hotel not found" });
+      }
+
+      await hotel.save();
+      res.status(200).send();
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Something went wrong" });

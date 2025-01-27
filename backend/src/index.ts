@@ -3,13 +3,13 @@ import cors from "cors";
 import "dotenv/config";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
+import path from "path";
+import { v2 as cloudinary } from "cloudinary";
 import authRoutes from "./routes/auth";
 import userRoutes from "./routes/users";
 import myHotelRoutes from "./routes/my-hotels";
 import hotelRoutes from "./routes/hotels";
 import bookingRoutes from "./routes/my-bookings";
-import path from "path";
-import { v2 as cloudinary } from "cloudinary";
 
 // TODO: add try catch for db connection and server listening
 

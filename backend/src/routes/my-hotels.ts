@@ -66,12 +66,7 @@ router.post(
 // get user's hotels
 router.get("/", verifyToken, async (req: Request, res: Response) => {
   try {
-    // TODO: remove
-    console.log("id", req.userId);
     const hotels = await Hotel.find({ userId: req.userId });
-
-    // TODO: remove
-    console.log("hotels", hotels);
     res.json(hotels);
   } catch (error) {
     res.status(500).json({ message: "Error fetching hotels" });
