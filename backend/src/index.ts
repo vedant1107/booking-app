@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL, "https://bookmystay-vf65.onrender.com/"],
+    origin: [process.env.FRONTEND_URL, "https://bookmystay-vf65.onrender.com"],
     // ensures that credentials like cookies and authentication headers are included in cross-origin requests.
     credentials: true,
   })
