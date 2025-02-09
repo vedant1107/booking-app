@@ -30,7 +30,12 @@ const EditHotel = () => {
   };
 
   return (
-    <ManageHotelForm hotel={hotel} onSave={handleSave} isLoading={isLoading} />
+    <ManageHotelForm
+      hotel={hotel}
+      onSave={handleSave}
+      isLoading={isLoading}
+      isEditForm
+    />
   );
 };
 
