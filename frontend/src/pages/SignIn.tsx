@@ -19,7 +19,13 @@ const SignIn = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInFormType>();
+  } = useForm<SignInFormType>({
+    defaultValues: {
+      // TODO: guest user credentials
+      email: "guest@gmail.com",
+      password: "guest@123",
+    },
+  });
 
   const mutation = useMutation(apiClient.signIn, {
     onSuccess: async () => {
