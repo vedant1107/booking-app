@@ -7,7 +7,7 @@ type Props = {
 
 const SearchResultsCard = ({ hotel }: Props) => {
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-8 gap-8">
+    <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-4 sm:p-8 gap-8">
       <div className="w-full h-[300px]">
         <img
           src={hotel.imageUrls[0]}
@@ -37,7 +37,7 @@ const SearchResultsCard = ({ hotel }: Props) => {
           <div className="line-clamp-4">{hotel.description}</div>
         </div>
 
-        <div className="grid grid-cols-2 items-end whitespace-nowrap">
+        <div className="grid grid-cols-1 sm:grid-cols-2 items-end whitespace-nowrap gap-y-4">
           <div className="flex gap-1 items-center">
             {hotel.facilities.slice(0, 3).map((facility) => (
               <span className="bg-slate-300 p-2 rounded-lg font-bold text-xs whitespace-nowrap">

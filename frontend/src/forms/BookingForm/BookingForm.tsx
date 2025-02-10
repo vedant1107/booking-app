@@ -6,7 +6,7 @@ import {
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { StripeCardElement } from "@stripe/stripe-js";
 import { useSearchContext } from "../../contexts/SearchContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import * as apiClient from "../../api-client";
 import { useAppContext } from "../../contexts/AppContext";
@@ -32,7 +32,7 @@ export type BookingFormData = {
 const BookingForm = ({ currentUser, paymentIntent }: Props) => {
   const stripe = useStripe();
   const elements = useElements();
-
+  const navigate = useNavigate();
   const search = useSearchContext();
   const { hotelId } = useParams();
 
@@ -78,6 +78,8 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
 
     if (result.paymentIntent?.status === "succeeded") {
       bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id });
+      // TODO: navigate to /my-bookings
+      navigate("/");
     }
   };
 

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import dayjs from "dayjs";
 
 type SearchContext = {
   destination: string;
@@ -34,7 +35,10 @@ export const SearchContextProvider = ({
   );
   const [checkOut, setCheckOut] = useState<Date>(
     () =>
-      new Date(sessionStorage.getItem("checkOut") || new Date().toISOString())
+      new Date(
+        sessionStorage.getItem("checkOut") ||
+          dayjs().add(1, "day").toISOString()
+      )
   );
   const [adultCount, setAdultCount] = useState<number>(() =>
     parseInt(sessionStorage.getItem("adultCount") || "1")

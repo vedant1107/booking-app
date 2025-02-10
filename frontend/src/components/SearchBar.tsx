@@ -4,6 +4,7 @@ import { MdTravelExplore } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
 const SearchBar = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="-mt-8 p-3 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
+      className="-mt-8 p-3 bg-orange-400 rounded shadow-md grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
     >
       <div className="flex flex-row items-center flex-1 bg-white p-2">
         <MdTravelExplore size={25} className="mr-2" />
@@ -101,18 +102,18 @@ const SearchBar = () => {
           wrapperClassName="min-w-full"
         />
       </div>
-      <div className="flex gap-1">
+      <div className="flex gap-1 flex-row-reverse 2xl:flex-row">
         <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500">
           Search
         </button>
         <button
-          className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500"
+          className="w-2/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500"
           onClick={() => {
             setDestination("");
             setAdultCount(1);
             setChildCount(1);
             setCheckIn(new Date());
-            setCheckOut(new Date());
+            setCheckOut(new Date(dayjs().add(1, "day").toISOString()));
           }}
         >
           Clear

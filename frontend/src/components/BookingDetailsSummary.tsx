@@ -40,7 +40,7 @@ const BookingDetailsSummary = ({
       </div>
 
       <div>
-        Guests{" "}
+        Guests
         <div className="font-bold">
           {adultCount} adults & {childCount} children
         </div>

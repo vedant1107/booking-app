@@ -6,6 +6,7 @@ import GuestsSection from "./GuestsSection";
 import ImagesSection from "./ImagesSection";
 import { HotelType } from "../../../../backend/src/shared/types.ts";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export type HotelFormData = {
   name: string;
@@ -36,6 +37,7 @@ const ManageHotelForm = ({
   hotel,
   isEditForm = false,
 }: Props) => {
+  const navigate = useNavigate();
   const formMethods = useForm<HotelFormData>();
   const { handleSubmit, reset } = formMethods;
 
@@ -73,6 +75,7 @@ const ManageHotelForm = ({
     });
 
     onSave(formData);
+    navigate("/my-hotels");
   });
 
   return (

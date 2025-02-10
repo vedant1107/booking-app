@@ -28,6 +28,9 @@ const Detail = () => {
           ))}
         </span>
         <h1 className="text-3xl font-bold">{hotel.name}</h1>
+        <p className="font-semibold text-lg">
+          {hotel.city}, {hotel.country}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -50,7 +53,7 @@ const Detail = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr]">
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4">
         <div className="whitespace-pre-line">{hotel.description}</div>
         <div className="h-fit">
           <GuestInfoForm
