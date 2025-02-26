@@ -62,7 +62,7 @@ mongoose
   });
 
 /** To keep server active */
-cron.schedule("*/14 * * * *", async () => {
+const cronJob = cron.schedule("*/10 * * * *", async () => {
   const res = await fetch(`${process.env.API_BASE_URL}/health`, {
     method: "GET",
   });
@@ -70,3 +70,5 @@ cron.schedule("*/14 * * * *", async () => {
     console.log("server active...");
   }
 });
+
+cronJob.start();
