@@ -10,6 +10,7 @@ import userRoutes from "./routes/users";
 import myHotelRoutes from "./routes/my-hotels";
 import hotelRoutes from "./routes/hotels";
 import bookingRoutes from "./routes/my-bookings";
+import cron from "node-cron";
 
 // TODO: add try catch for db connection and server listening
 
@@ -40,6 +41,10 @@ app.use("/api/my-hotels", myHotelRoutes);
 app.use("/api/hotels", hotelRoutes);
 app.use("/api/my-bookings", bookingRoutes);
 
+app.use("/health", async (req: Request, res: Response) => {
+  res.send({ message: "Health OK!" });
+});
+
 app.get("*", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 });
@@ -55,3 +60,13 @@ mongoose
   .catch((error) => {
     console.log("db connection error: ", error);
   });
+
+/** To keep server active */
+cron.schedule("*/14 * * * *", async () => {
+  const res = await fetch(`${process.env.API_BASE_URL}/health`, {
+    method: "GET",
+  });
+  if (res.ok) {
+    console.log("server active...");
+  }
+});
